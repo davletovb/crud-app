@@ -14,7 +14,7 @@ class TestBase(TestCase):
         config_name = 'testing'
         app = create_app(config_name)
         app.config.update(
-            SQLALCHEMY_DATABASE_URI='sqlite:///C:\\Users\\Behruz D\\Documents\\stix-ui\\test_test.db'
+            SQLALCHEMY_DATABASE_URI='TEST DATABASE URI'
         )
 
         return app
