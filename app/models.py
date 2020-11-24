@@ -1,5 +1,6 @@
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+import datetime
 
 from app import db, login_manager
 
@@ -53,3 +54,85 @@ class Role(db.Model):
 
     def __repr__(self):
         return '<Role: {}>'.format(self.name)
+
+
+class UserAccount(db.Model):
+    # UserAccount table for STIX format
+
+    __tablename__ = 'user_accounts'
+
+    id = db.Column(db.String(64), primary_key=True)
+    name = db.Column(db.String(64))
+    description = db.Column(db.Text, nullable=True)
+    type = db.Column(db.String(64), default="user-account")
+    created = db.Column(db.DateTime, default=datetime.datetime.now)
+    modified = db.Column(db.DateTime, default=datetime.datetime.now)
+    account_type = db.Column(db.String(32), nullable=True)
+    account_created = db.Column(db.DateTime, nullable=True)
+    account_is_disabled = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return '<User Account: {}>'.format(self.name)
+
+
+class Identity(db.Model):
+    # Identity table for STIX format
+
+    __tablename__ = 'identities'
+
+    id = db.Column(db.String(64), primary_key=True)
+    name = db.Column(db.String(64))
+    description = db.Column(db.Text, nullable=True)
+    type = db.Column(db.String(64), default="identity")
+    created = db.Column(db.DateTime, default=datetime.datetime.now)
+    modified = db.Column(db.DateTime, default=datetime.datetime.now)
+    identity_roles = db.Column(db.String(64), nullable=True)
+    identity_class = db.Column(db.String(64), nullable=True)
+    contact_information = db.Column(db.String(128), nullable=True)
+    location = db.Column(db.String(128), nullable=True)
+
+    def __repr__(self):
+        return '<Identity: {}>'.format(self.name)
+
+
+class ThreatActor(db.Model):
+    # Threat Actor table for STIX format
+
+    __tablename__ = 'threat_actors'
+
+    id = db.Column(db.String(64), primary_key=True)
+    name = db.Column(db.String(128))
+    description = db.Column(db.Text, nullable=True)
+    type = db.Column(db.String(64), default="threat-actor")
+    created = db.Column(db.DateTime, default=datetime.datetime.now)
+    modified = db.Column(db.DateTime, default=datetime.datetime.now)
+    threat_actor_types = db.Column(db.String(64), nullable=True)
+    aliases = db.Column(db.String(64), nullable=True)
+    first_seen = db.Column(db.DateTime, default=datetime.datetime.now)
+    last_seen = db.Column(db.DateTime, default=datetime.datetime.now)
+    threat_actor_roles = db.Column(db.String(64), nullable=True)
+    goals = db.Column(db.String(64), nullable=True)
+    sophistication = db.Column(db.String(64), nullable=True)
+    resource_level = db.Column(db.String(64), nullable=True)
+    primary_motivation = db.Column(db.String(64), nullable=True)
+    secondary_motivations = db.Column(db.String(64), nullable=True)
+    personal_motivations = db.Column(db.String(64), nullable=True)
+
+    def __repr__(self):
+        return '<Threat Actor: {}>'.format(self.name)
+
+
+class Post(db.Model):
+    # UserAccount table for STIX format
+
+    __tablename__ = 'posts'
+
+    id = db.Column(db.String(64), primary_key=True)
+    text = db.Column(db.String(64))
+    description = db.Column(db.Text, nullable=True)
+    type = db.Column(db.String(64), default="post")
+    created = db.Column(db.DateTime, default=datetime.datetime.now)
+    modified = db.Column(db.DateTime, default=datetime.datetime.now)
+
+    def __repr__(self):
+        return '<Post: {}>'.format(self.text)
