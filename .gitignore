@@ -1,6 +1,7 @@
 *.pyc
 *.db
 .idea
+.gitignore
 instance/
 venv/
 migrations/
