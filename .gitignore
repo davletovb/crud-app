@@ -1,5 +1,6 @@
 *.pyc
 *.db
+.idea
 instance/
 venv/
 migrations/

@@ -20,7 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae9ccdff-0582-4e98-bab0-5388f956b70c" name="Default Changelist" comment="add stix object models">
-      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +99,7 @@
       <workItem from="1605751620748" duration="40000" />
       <workItem from="1605819853209" duration="5824000" />
       <workItem from="1605884673178" duration="3782000" />
-      <workItem from="1606187631315" duration="409000" />
+      <workItem from="1606187631315" duration="932000" />
     </task>
     <servers />
   </component>
