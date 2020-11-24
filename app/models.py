@@ -86,8 +86,8 @@ class Identity(db.Model):
     type = db.Column(db.String(64), default="identity")
     created = db.Column(db.DateTime, default=datetime.datetime.now)
     modified = db.Column(db.DateTime, default=datetime.datetime.now)
-    identity_roles = db.Column(db.String(64), nullable=True)
-    identity_class = db.Column(db.String(64), nullable=True)
+    identity_role = db.Column(db.Integer, db.ForeignKey('identityroles.id', ondelete=db.null), nullable=True)
+    identity_class = db.Column(db.Integer, db.ForeignKey('identityclasses.id', ondelete=db.null), nullable=True)
     contact_information = db.Column(db.String(128), nullable=True)
     location = db.Column(db.String(128), nullable=True)
 
@@ -106,16 +106,16 @@ class ThreatActor(db.Model):
     type = db.Column(db.String(64), default="threat-actor")
     created = db.Column(db.DateTime, default=datetime.datetime.now)
     modified = db.Column(db.DateTime, default=datetime.datetime.now)
-    threat_actor_types = db.Column(db.String(64), nullable=True)
+    threat_actor_types = db.Column(db.Integer, db.ForeignKey('threatactortypes.id', ondelete=db.null), nullable=True)
     aliases = db.Column(db.String(64), nullable=True)
     first_seen = db.Column(db.DateTime, default=datetime.datetime.now)
     last_seen = db.Column(db.DateTime, default=datetime.datetime.now)
-    threat_actor_roles = db.Column(db.String(64), nullable=True)
+    threat_actor_roles = db.Column(db.Integer, db.ForeignKey('threatactorroles.id', ondelete=db.null), nullable=True)
     goals = db.Column(db.String(64), nullable=True)
-    sophistication = db.Column(db.String(64), nullable=True)
-    resource_level = db.Column(db.String(64), nullable=True)
-    primary_motivation = db.Column(db.String(64), nullable=True)
-    secondary_motivations = db.Column(db.String(64), nullable=True)
+    sophistication = db.Column(db.Integer, db.ForeignKey('threatactorsophistications.id', ondelete=db.null), nullable=True)
+    resource_level = db.Column(db.Integer, db.ForeignKey('attackresourcelevels.id', ondelete=db.null), nullable=True)
+    primary_motivation = db.Column(db.Integer, db.ForeignKey('attackmotivations.id', ondelete=db.null), nullable=True)
+    secondary_motivations = db.Column(db.Integer, db.ForeignKey('attackmotivations.id', ondelete=db.null), nullable=True)
     personal_motivations = db.Column(db.String(64), nullable=True)
 
     def __repr__(self):
@@ -136,3 +136,73 @@ class Post(db.Model):
 
     def __repr__(self):
         return '<Post: {}>'.format(self.text)
+
+
+class ThreatActorSophistication(db.Model):
+    # Threat Actor Sophistication OV table
+
+    __tablename__ = 'threatactorsophistications'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    description = db.Column(db.Text, nullable=True)
+
+
+class AttackResourceLevel(db.Model):
+    # Attack Resource Level OV table
+
+    __tablename__ = 'attackresourcelevels'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    description = db.Column(db.Text, nullable=True)
+
+
+class AttackMotivation(db.Model):
+    # Attack Motivation OV table
+
+    __tablename__ = 'attackmotivations'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    description = db.Column(db.Text, nullable=True)
+
+
+class ThreatActorType(db.Model):
+    # Threat Actor Type OV table
+
+    __tablename__ = 'threatactortypes'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    description = db.Column(db.Text, nullable=True)
+
+
+class ThreatActorRole(db.Model):
+    # Threat Actor Role OV table
+
+    __tablename__ = 'threatactorroles'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    description = db.Column(db.Text, nullable=True)
+
+
+class IdentityClass(db.Model):
+    # Identity Class OV table
+
+    __tablename__ = 'identityclasses'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    description = db.Column(db.Text, nullable=True)
+
+
+class IdentityClass(db.Model):
+    # Identity Role OV table
+
+    __tablename__ = 'identityroles'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    description = db.Column(db.Text, nullable=True)
