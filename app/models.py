@@ -198,7 +198,7 @@ class IdentityClass(db.Model):
     description = db.Column(db.Text, nullable=True)
 
 
-class IdentityClass(db.Model):
+class IdentityRole(db.Model):
     # Identity Role OV table
 
     __tablename__ = 'identityroles'
