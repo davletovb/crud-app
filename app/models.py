@@ -128,11 +128,13 @@ class Post(db.Model):
     __tablename__ = 'posts'
 
     id = db.Column(db.String(64), primary_key=True)
-    text = db.Column(db.String(64))
+    text = db.Column(db.String(64), nullable=True)
     description = db.Column(db.Text, nullable=True)
     type = db.Column(db.String(64), default="post")
     created = db.Column(db.DateTime, default=datetime.datetime.now)
     modified = db.Column(db.DateTime, default=datetime.datetime.now)
+    post_type = db.Column(db.String(64), nullable=True)
+    post_url = db.Column(db.String(64), nullable=True)
 
     def __repr__(self):
         return '<Post: {}>'.format(self.text)
