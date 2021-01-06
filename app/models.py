@@ -123,7 +123,7 @@ class ThreatActor(db.Model):
 
 
 class Post(db.Model):
-    # UserAccount table for STIX format
+    # Post table for STIX format
 
     __tablename__ = 'posts'
 
